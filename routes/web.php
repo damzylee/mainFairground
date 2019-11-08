@@ -17,4 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/admin', 'HomeController@admin')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{user}', 'HomeController@show');
+Route::get('/{user}/edit', 'HomeController@edit');
+Route::patch('/{user}', 'HomeController@update');
+Route::delete('/{user}', 'HomeController@destroy');
