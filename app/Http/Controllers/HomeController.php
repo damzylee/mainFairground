@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Company;
 
 use Illuminate\Http\Request;
 
@@ -24,32 +25,36 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         if(auth()->user()->is_admin == 1){
-            return redirect('admin');
+            return redirect('admin', compact('companies'));
         }
         else{
-            return view('home');
+            return view('home', compact('companies'));
         }
     }
 
     public function admin()
     {
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         if(auth()->user()->is_admin == 1){
-            return view('admin');
+            return redirect('admin', compact('companies'));
         }
         else{
-            return view('home');
+            return view('home', compact('companies'));
         }
     }
 
     public function show(User $user)
     {
-        return view('profile.show', compact('user'));
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        return view('profile.show', compact('user', 'companies'));
     }
 
     public function edit(User $user)
     {
-        return view('profile.edit', compact('user'));
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        return view('profile.edit', compact('user', 'companies'));
     }
 
     public function update(Request $request, User $user)
@@ -78,7 +83,8 @@ class HomeController extends Controller
         $user->update($validatedUser);
 
         $this->storeImage($user);
-        return view('profile.show', compact('user'));
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        return view('profile.show', compact('user', 'companies'));
     }
 
     public function delete(User $user)

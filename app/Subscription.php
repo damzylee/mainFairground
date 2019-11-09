@@ -19,7 +19,7 @@ class Subscription extends Model
 
     public function companies(){
 
-        return $this->belongsTo('App\Company');
+        return $this->hasMany('App\Company');
     
     }
 }

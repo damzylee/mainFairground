@@ -12,6 +12,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../fontawesome/css/fontawesome.min">
 
     </head>
     <body>

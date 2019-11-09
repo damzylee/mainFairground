@@ -12,9 +12,13 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Company $company)
     {
-        //
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        
+        $company = Company::findOrFail($company);
+
+        return view('company.index', compact('company', 'companies'));
     }
 
     /**
@@ -24,9 +28,10 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         $company = new Company();
 
-        return view('company.create', compact('company'));
+        return view('company.create', compact('company', 'companies'));
     }
 
     /**
@@ -37,7 +42,17 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = Company::create($this->requestValidation());
+
+        $this->storeImage($company);
+        $company->update([
+            'user_id' => auth()->user()->id
+        ]);
+
+        $company = Company::findOrFail($company);
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+        return view('company.index', compact('company', 'companies'));
     }
 
     /**
@@ -48,7 +63,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        return view('company.index', compact('company', 'companies'));
     }
 
     /**
@@ -83,5 +99,37 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //
+    }
+
+    protected function requestValidation()
+    {
+        return tap(request()->validate([
+
+            'name' => 'required|min:4',
+            'email' => 'required | email',
+            'number' => 'required | numeric',
+            'country' => 'required | min:3',
+            'state' => 'required | min:3',
+            'address' => 'required | min:7',
+            'type' => 'required',
+            'profile' => 'required | max:500',
+            'YOE' => 'required | date | before_or_equal:today'
+        ]), function(){
+                if(request()->hasFile('image'))
+                {
+                    request()->validate([
+                        'image' => 'file|image|max:10000'
+                    ]);
+                }
+        });
+    }
+
+    protected function storeImage($company)
+    {
+        if(request()->has('image')){
+            $company->update([
+                'image' => request()->image->store('uploads', 'public')
+            ]);
+        }
     }
 }

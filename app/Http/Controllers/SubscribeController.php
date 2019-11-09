@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Subscribe;
 use App\Subscription;
+use App\User;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -51,7 +52,14 @@ class SubscribeController extends Controller
     {
         $subscriptions = Subscription::findOrFail($subscribe);
         $subscription = $subscriptions[0];
-        return view('subscription.success', compact('subscription'));
+        
+        $user = User::findOrFail(auth()->user()->id);
+        $user->update([
+            'subscription_id' => $subscription->id,
+            'type' => 'host' 
+        ]);
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        return view('subscription.success', compact('subscription', 'companies'));
     }
 
     /**
