@@ -23,3 +23,8 @@ Route::get('/{user}', 'HomeController@show');
 Route::get('/{user}/edit', 'HomeController@edit');
 Route::patch('/{user}', 'HomeController@update');
 Route::delete('/{user}', 'HomeController@destroy');
+
+Route::resource('/subscription', 'SubscriptionController');
+Route::resource('/subscribe', 'SubscribeController');
+Route::resource('/company', 'CompanyController');
+

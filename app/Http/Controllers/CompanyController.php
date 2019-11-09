@@ -24,7 +24,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        $company = new Company();
+
+        return view('company.create', compact('company'));
     }
 
     /**

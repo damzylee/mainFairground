@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubscriptonsTable extends Migration
+class CreateSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSubscriptonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptons', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
             $table->float('amount');
@@ -29,6 +29,6 @@ class CreateSubscriptonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptons');
+        Schema::dropIfExists('subscriptions');
     }
 }

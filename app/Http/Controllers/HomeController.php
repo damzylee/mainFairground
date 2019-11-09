@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -59,9 +60,8 @@ class HomeController extends Controller
             'email' => 'required | email',
             'number' => 'required | numeric',
             'country' => 'required | min:3',
-            'state' => 'min:3',
+            'state' => 'required | min:3',
             'town' => 'min:7',
-            'type' => 'required',
             'BIOS' => 'max:255',
             'DOB' => 'date | before_or_equal:today'
 
@@ -77,6 +77,7 @@ class HomeController extends Controller
     );
         $user->update($validatedUser);
 
+        $this->storeImage($user);
         return view('profile.show', compact('user'));
     }
 
@@ -85,4 +86,13 @@ class HomeController extends Controller
         $user->delete();
     }
 
+
+    protected function storeImage($user)
+    {
+        if(request()->has('image')){
+            $user->update([
+                'image' => request()->image->store('uploads', 'public')
+            ]);
+        }
+    }
 }

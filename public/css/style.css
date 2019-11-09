@@ -1,0 +1,181 @@
+            html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .full-height {
+                height: 8vh;
+            }
+
+            .welcome {
+                height:600px !important;
+                opacity: 70%;
+            }
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
+            .overlape {
+                position: absolute;
+                width:100%;
+                height: 100%;
+                z-index:3;
+            }
+
+            @media screen and (max-width: 699px) {
+                .overlapetext {
+                    float: none;
+                    width: 100%;
+                    font-size: 3rem;
+                    color: white !important;
+                    font-family: sans-serif !important;
+                    margin-top:50%;
+                }
+
+                .overlapetextsmall {
+                    color: white !important;
+                    font-family: sans-serif !important;
+                    font-size: 1.5rem;
+                    font-weight: 200;
+                }
+
+                .overlapetext:hover {
+                    float: none;
+                    width: 100%;
+                    font-size: 3rem;
+                    color: gold !important;
+                    font-family: sans-serif !important;
+                    margin-top:50%;
+                }
+
+                .overlapetextsmall:hover {
+                    color: gold !important;
+                    font-family: sans-serif !important;
+                    font-size: 1.5rem;
+                    font-weight: 200;
+                }
+
+
+            }
+
+            @media screen and (min-width: 700px) and (max-width: 900px)
+            {
+
+                .overlapetext {
+                    margin-top:25%;
+                    color: white !important;
+                    font-family: sans-serif !important;
+                    font-size: 6rem;
+                    font-weight: 400;
+                }
+
+                .overlapetextsmall {
+                color: white !important;
+                font-family: sans-serif !important;
+                font-size: 2rem;
+                font-weight: 200;
+            }
+
+            .overlapetextsmall:hover {
+                color: gold !important;
+                font-family: sans-serif !important;
+                font-size: 2rem;
+                font-weight: 200;
+            }
+
+            
+            .overlapetext:hover {
+                margin-top:25%;
+                color: gold !important;
+                font-family: sans-serif !important;
+                font-size: 6rem;
+                font-weight: 400;
+            }
+
+            }
+
+            @media screen and (min-width: 901px)
+            {
+
+                .overlapetext {
+                    margin-top:13%;
+                    color: white !important;
+                    font-family: sans-serif !important;
+                    font-size: 6rem;
+                    font-weight: 400;
+                }
+
+                .overlapetextsmall {
+                color: white !important;
+                font-family: sans-serif !important;
+                font-size: 2rem;
+                font-weight: 200;
+            }
+
+            .overlapetextsmall:hover {
+                color: gold !important;
+                font-family: sans-serif !important;
+                font-size: 2rem;
+                font-weight: 200;
+            }
+
+            
+            .overlapetext:hover {
+                margin-top:13%;
+                color: gold !important;
+                font-family: sans-serif !important;
+                font-size: 6rem;
+                font-weight: 400;
+            }
+
+            }
+
+
+            .top-left {
+                position: absolute;
+                left: 50px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+
+            #gold {
+                color:gold;
+            }

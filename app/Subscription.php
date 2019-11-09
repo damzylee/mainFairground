@@ -23,4 +23,3 @@ class Subscription extends Model
     
     }
 }
-

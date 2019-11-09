@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\subscripton;
+use App\Subscription;
 use Faker\Generator as Faker;
 
-$factory->define(subscripton::class, function (Faker $faker) {
+$factory->define(Subscription::class, function (Faker $faker) {
     return [
         //
     ];

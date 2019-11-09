@@ -112,7 +112,7 @@
         @yield('jumbo')
         
 
-        <main class="py-1">   
+        <main>   
             @yield('content')
         </main>
     </div>

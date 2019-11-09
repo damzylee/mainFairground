@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\subscripton;
+use App\Subscribe;
+use App\Subscription;
 use Illuminate\Http\Request;
 
-class SubscriptonController extends Controller
+class SubscribeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SubscriptonController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +25,9 @@ class SubscriptonController extends Controller
      */
     public function create()
     {
-        //
+        $subscriptions = Subscription::all();
+
+        return view('subscription.subscribe', compact('subscriptions'));
     }
 
     /**
@@ -35,27 +38,29 @@ class SubscriptonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\subscripton  $subscripton
+     * @param  \App\Subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function show(subscripton $subscripton)
+    public function show(Subscription $subscribe)
     {
-        //
+        $subscriptions = Subscription::findOrFail($subscribe);
+        $subscription = $subscriptions[0];
+        return view('subscription.success', compact('subscription'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\subscripton  $subscripton
+     * @param  \App\Subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function edit(subscripton $subscripton)
+    public function edit(Subscribe $subscribe)
     {
         //
     }
@@ -64,10 +69,10 @@ class SubscriptonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\subscripton  $subscripton
+     * @param  \App\Subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, subscripton $subscripton)
+    public function update(Request $request, Subscribe $subscribe)
     {
         //
     }
@@ -75,10 +80,10 @@ class SubscriptonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\subscripton  $subscripton
+     * @param  \App\Subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(subscripton $subscripton)
+    public function destroy(Subscribe $subscribe)
     {
         //
     }

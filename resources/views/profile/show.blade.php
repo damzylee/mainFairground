@@ -5,9 +5,9 @@
     <div class="row">
 
     <div class="col-4">
-        <div class="card" style="width: 18rem;">
+        <div class="card mt-5" style="width: 18rem;">
                 @if($user->image)
-                <img src="{{'../storage/' . $user->image}}" alt="{{$user->name}}" class="card-img-top rounded-circle p-3" style="width: inherit;">
+                <img src="{{'../storage/' . $user->image}}" alt="{{$user->name}}" class="card-img-top rounded-circle p-3" style="width: inherit; height:280px;">
                 @endif
             <div class="card-body text-center">
                 <h5 class="card-title">User profile</h5>

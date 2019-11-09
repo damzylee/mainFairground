@@ -41,12 +41,12 @@
 
         <div class="col-4">
             <div class="card my-4 text-center">
-                <h3 class="card-title p-3">Profile</h3>
+                <!-- <h3 class="card-title p-3">Profile</h3> -->
                 <div class="row p-2">
-                    <div class="col-5 text-center p-4">
-                        <img src="../storage/{{ Auth::user()->image }}" class="rounded-circle" alt="profile picture"  style="width: inherit;">
+                    <div class="col-6 text-center p-4">
+                        <img src="../storage/{{ Auth::user()->image }}" class="rounded-circle" alt="profile picture"  style="width: inherit; height:200px;">
                     </div>
-                    <div class="col-7 text-center p-2">
+                    <div class="col-6 text-center py-5">
                         <h4>Name</h4>
                         <p>{{ Auth::user()->name }}</p>
                     </div>
@@ -59,7 +59,7 @@
                         <a href="/{{ Auth::user()->id }}"><button class="btn btn-primary">Edit profile</button></a>
                     </div>
                     <div class="col-6 text-center p-2">
-                        <a href="/subscription/"><button class="btn btn-primary">Become a Host</button></a>
+                        <a href="/subscribe/create"><button class="btn btn-primary">Become a Host</button></a>
                     </div>
                 </div>
 
