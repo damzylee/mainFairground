@@ -56,15 +56,15 @@
             <div class="card my-4">
                 <div class="row p-2">
                     <div class="col-6 text-center p-2">
-                        <a href="/{{ Auth::user()->id }}"><button class="btn btn-primary">Edit profile</button></a>
+                        <a href="/{{ Auth::user()->id }}"><button class="btn btn-outline-secondary">Edit profile</button></a>
                     </div>
                     <div class="col-6 text-center p-2">
-                        <a href="/subscribe/create"><button class="btn btn-primary">Become a Host</button></a>
+                        <a href="/subscribe/create"><button class="btn btn-outline-dark">Become a Host</button></a>
                     </div>
                 </div>
 
                 <div class="text-center my-2">
-                    <a href="/review/"><button class="btn btn-primary p-2">Write review</button></a>
+                    <a href="/review/"><button class="btn btn-outline-info p-2">Write review</button></a>
                 </div>
             </div>
         </div>

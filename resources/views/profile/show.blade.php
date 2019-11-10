@@ -10,7 +10,7 @@
                 <img src="{{'../storage/' . $user->image}}" alt="{{$user->name}}" class="card-img-top rounded-circle p-3" style="width: inherit; height:280px;">
                 @endif
             <div class="card-body text-center">
-                <h5 class="card-title">User profile</h5>
+                <h5 class="card-title">About me</h5>
                 <p class="card-text">{{$user->BIOS}}</p>
                 <div class="d-flex flex-row justify-content-around">
                     <a href="{{$user->id}}/edit" class="btn btn-primary" style="height:fit-content !important;">Edit</a>
@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th class="p-3" colspan="2">
-                    <h1>{{$user->name}} profile page</h1>
+                    <h1>{{$user->name}}'s profile page</h1>
                 </th>
             </tr>
         </thead>

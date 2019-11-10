@@ -97,7 +97,24 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+
+        return view('company.edit', compact('company', 'companies', 'services'));
+    }
+
+    public function deleteCompany(Company $company)
+    {
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+
+        return view('company.delete', compact('company', 'companies', 'services'));
     }
 
     /**
@@ -109,7 +126,18 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $company->update($this->requestValidation());
+
+        $this->storeImage($company);
+
+        //get all the companies owned by the host
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+
+        return view('company.index', compact('company', 'companies', 'services'));
     }
 
     /**
@@ -120,7 +148,17 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        //get all the companies owned by the host
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+
+        return view('company.index', compact('company', 'companies', 'services'));
+
     }
 
     protected function requestValidation()

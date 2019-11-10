@@ -54,11 +54,11 @@
                     <div class="col-3">
                         @if(Auth::user()->companies)
                                 <div class="p-2">
-                                    <a href="/service/create"><button class="btn btn-primary">add service</button></a>
+                                    <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
                                 </div>
                             @else
                                 <div class="p-2">
-                                    <a href="/request/create"><button class="btn btn-primary">make a request</button></a>
+                                    <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
                                 </div>
                             @endif
                     </div>
@@ -66,10 +66,23 @@
             </div>
 
             <div class="col-5 offset-1">
-                <h3>Location</h3>
-                <p>{{$company->address}},</p>
-                <p>{{$company->state}}, {{$company->country}}</p>
-                <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
+                <div class="row">
+                    <div class="col-9">
+                        <h3>Location</h3>
+                        <p>{{$company->address}},</p>
+                        <p>{{$company->state}}, {{$company->country}}</p>
+                        <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
+                    </div>
+                    <div class="col-3">
+                        <div class="p-2">
+                            <a href="/company/{{$company->id}}/edit"><button class="btn btn-light">edit company's details</button></a>
+                        </div>
+                        <div class="p-2">
+                            <a href="/delete"><button class="btn btn-outline-warning">deactivate company</button></a>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
 
         </div>
@@ -85,7 +98,7 @@
             <div class="col-3 mt-4">
             @if(Auth::user()->type === 'user')
                 <div class="p-2">
-                    <a href="/review/create"><button class="btn btn-primary">make review</button></a>
+                    <a href="/review/create"><button class="btn btn-outline-info">make review</button></a>
                 </div>
             @endif
             </div>
