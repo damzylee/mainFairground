@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Service;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -64,7 +65,28 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
-        return view('company.index', compact('company', 'companies'));
+
+        //finding and setting the active company of a user to one so i can be able to use if i need its id later and setting others to zero
+        $find = Company::findOrFail($company->id);
+        if($find->confirm == 0){
+            $find->update([
+                'confirm' => 1
+                ]);
+
+            foreach($companies as $companys){
+                if($companys->id !== $find->id){
+                    $companys->update([
+                        'confirm' => 0
+                    ]);
+                }
+            }
+        }
+        //end
+
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+
+        return view('company.index', compact('company', 'companies', 'services'));
     }
 
     /**

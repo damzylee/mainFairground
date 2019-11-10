@@ -27,4 +27,5 @@ Route::delete('/{user}', 'HomeController@destroy');
 Route::resource('/subscription', 'SubscriptionController');
 Route::resource('/subscribe', 'SubscribeController');
 Route::resource('/company', 'CompanyController');
+Route::resource('/service', 'ServiceController');
 

@@ -12,7 +12,7 @@
     <form action="/company" method="POST" class="pb-5" enctype="multipart/form-data">
         @include('company.form')
 
-        <input type="submit" class="btn btn-primary" value="REGISTER COMPANY"/>
+        <input type="submit" class="btn btn-primary form-control" value="REGISTER COMPANY"/>
     </form>
 </div>
 @endsection

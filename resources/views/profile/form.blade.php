@@ -13,7 +13,7 @@
             </div>
             
             <div class="form-group">
-                <label for="number">Number:</label>
+                <label for="number">Phone number:</label>
                 <input type="text" name="number" value="{{old('number') ?? $user->number}}" class="form-control">
                 <div>{{$errors->first('number')}}</div>
             </div>
@@ -37,8 +37,8 @@
             </div>
 
             <div class="form-group">
-                <label for="BIOS">About user:</label>
-                <textarea name="BIOS" id="BIOS" placeholder="{{old('BIOS') ?? $user->BIOS}} " class="form-control" cols="60" rows="10">about your user...</textarea>
+                <label for="BIOS">Write about you:</label>
+                <textarea name="BIOS" id="BIOS" class="form-control" cols="60" rows="10">{{old('BIOS') ?? $user->BIOS}}</textarea>
                 <div>{{$errors->first('BIOS')}}</div>
             </div>
             
