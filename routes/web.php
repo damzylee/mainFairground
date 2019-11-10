@@ -29,4 +29,5 @@ Route::resource('/subscribe', 'SubscribeController');
 Route::resource('/company', 'CompanyController');
 Route::get('/delete', 'CompanyController@deleteCompany');
 Route::resource('/service', 'ServiceController');
+Route::resource('/review', 'ReviewController');
 

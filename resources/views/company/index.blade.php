@@ -19,88 +19,119 @@
     </div>
 
 
-    <div class="container">
+    <div class="container my-5">
         <div class="row">
-            <div class="col-6">
-                <h3 class="text-center">Services offered by {{$company->name}}</h3>
-                <div class="row">
-                    <div class="col-9">
+            <h3 class="text-center">Services offered by {{$company->name}}</h3>
+            <div class="col-9">
                 @if(count($services) > 0)
                 <?php
                     $i = 1;
                 ?>
-                        @foreach($services as $service)
-                            <a href="/service/{{$service->id}}">
-                                @if($i%3 == 0)
-                                <a href="/service/{{$service->id}}">
-                                    <button class="btn btn-info my-1 mx-1">
-                                @elseif($i%3 == 1)
-                                <a href="/service/{{$service->id}}">
-                                    <button class="btn btn-dark my-1 mx-1">
-                                @else
-                                <a href="/service/{{$service->id}}">
-                                    <button class="btn btn-secondary my-1 mx-1">
-                                @endif
-                                        {{$service->name}}
-                                    </button>
-                            </a>
-                            <?php
-                                $i++;
-                            ?>
-                        @endforeach
+                    @foreach($services as $service)
+                        @if($i%3 == 0)
+                        <a href="/service/{{$service->id}}">
+                            <button class="btn btn-info my-1 mx-1">
+                        @elseif($i%3 == 1)
+                        <a href="/service/{{$service->id}}">
+                            <button class="btn btn-dark my-1 mx-1">
+                        @else
+                        <a href="/service/{{$service->id}}">
+                            <button class="btn btn-secondary my-1 mx-1">
                         @endif
-                    </div>
-
-                    <div class="col-3">
-                        @if(Auth::user()->companies)
-                                <div class="p-2">
-                                    <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
-                                </div>
-                            @else
-                                <div class="p-2">
-                                    <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
-                                </div>
-                            @endif
-                    </div>
-                </div>
+                                {{$service->name}}
+                            </button>
+                    </a>
+                    <?php
+                        $i++;
+                    ?>
+                @endforeach
+                @endif
             </div>
 
-            <div class="col-5 offset-1">
-                <div class="row">
-                    <div class="col-9">
-                        <h3>Location</h3>
-                        <p>{{$company->address}},</p>
-                        <p>{{$company->state}}, {{$company->country}}</p>
-                        <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
+            <div class="col-3">
+                @if(Auth::user()->companies)
+                    <div class="p-2">
+                        <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
                     </div>
-                    <div class="col-3">
-                        <div class="p-2">
-                            <a href="/company/{{$company->id}}/edit"><button class="btn btn-light">edit company's details</button></a>
-                        </div>
-                        <div class="p-2">
-                            <a href="/delete"><button class="btn btn-outline-warning">deactivate company</button></a>
-                        </div>
+                @else
+                    <div class="p-2">
+                        <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
                     </div>
-                </div>
-                
+                @endif
             </div>
-
         </div>
     </div>
 
     <div class="container my-5">
         <div class="row">
             <div class="col-9">
-                <h1>Reviews</h1>
+                <h3>Location</h3>
+                <p>{{$company->address}},</p>
+                <p>{{$company->state}}, {{$company->country}}</p>
+                <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
+            </div>
+            <div class="col-3">
+                <div class="p-2">
+                    <a href="/company/{{$company->id}}/edit"><button class="btn btn-light">edit company's details</button></a>
+                </div>
+                <div class="p-2 m-2">
+                    <a href="/delete"><button class="btn btn-outline-warning">deactivate company</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-9">
+                <h1>Reviews on {{$company->name}}</h1>
                 <hr>
+                @foreach($reviews as $review) 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"/>
+                                <p class="text-secondary text-center">{{$review->created_at}}</p>
+                            </div>
+                            <div class="col-md-10">
+                                <p>
+                                    <a class="float-left" href="/review/{{$review->id}}"><strong>Name</strong></a>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+                            </p>
+                            <div class="clearfix"></div>
+                                <p>{{$review->review}}</p>
+                                <p>
+                                    <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-comment"></i> comment</a>
+                                    <a class="float-right btn btn-outline-info  ml-2"> <i class="fa fa-heart"></i> like</a>
+                                    <form action="{{$review->id}}" class="ml-5" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <a class="float-right btn btn-outline-danger"> <i class="fa fa-trash"></i> delete</a>
+                                    </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-3 mt-4">
-            @if(Auth::user()->type === 'user')
-                <div class="p-2">
-                    <a href="/review/create"><button class="btn btn-outline-info">make review</button></a>
-                </div>
-            @endif
+                                            
+                @endforeach
+
+
+                    
+                <div class="col-3 mt-4">
+                @if(Auth::user()->type === 'user')
+                    <div class="p-2">
+                        <a href="/review/create"><button class="btn btn-outline-info">make review</button></a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

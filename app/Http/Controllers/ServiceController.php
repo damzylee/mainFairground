@@ -61,8 +61,11 @@ class ServiceController extends Controller
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
+        
+        $reviews = Review::where('company_id', '=', $company->id)->get();
+
         //redirect to company page after adding a service
-        return view('company.index', compact('company', 'companies', 'services'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
     }
 
     /**
@@ -141,8 +144,10 @@ class ServiceController extends Controller
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
+        
+        $reviews = Review::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('services', 'company', 'companies'));
+        return view('company.index', compact('services', 'company', 'companies', 'reviews'));
     }
 
     protected function requestValidation()

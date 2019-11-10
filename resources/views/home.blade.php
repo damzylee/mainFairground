@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="text-center my-2">
-                    <a href="/review/"><button class="btn btn-outline-info p-2">Write review</button></a>
+                    <a href="/review/create"><button class="btn btn-outline-info p-2">Write review</button></a>
                 </div>
             </div>
         </div>

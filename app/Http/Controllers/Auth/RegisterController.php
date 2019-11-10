@@ -68,6 +68,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'is_admin' => 0,
+            'image' => 'uploads/default.png',
         ]);
     }
 }

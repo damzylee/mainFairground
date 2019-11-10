@@ -21,6 +21,8 @@
     <link href="../css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../fontawesome/css/fontawesome.min">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+                    
 </head>
 <body>
     <div id="app2">
@@ -57,19 +59,19 @@
                             
                         @else
                             <li class="nav-item" href="#">
-                                <a href="/home" class="nav-link">Dashboard</a>
+                                <a href="/home" class="nav-link"><i class="fa fa-home"></i></a>
                             </li>
                             <li  class="nav-item" href="#">
-                                <a href="/{{ Auth::user()->id }}" class="nav-link">Profile</a>
+                                <a href="/{{ Auth::user()->id }}" class="nav-link"><i class="fa fa-user"></i></a>
                             </li>
                             <li class="nav-item" href="#">
-                                <a href="#" class="nav-link">Notification</a>
+                                <a href="#" class="nav-link"><i class="fa fa-bell"></i></a>
                             </li>
 
                             @if(Auth::user()->type === 'host')
 
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa fa-building"></i>
                                        Company <span class="caret"></span>
                                     </a>
 
@@ -92,6 +94,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
+                                                        <i class="fa fa-sign-out"></i>
                                         {{ __('Logout') }}
                                     </a>
 
@@ -110,7 +113,15 @@
         @yield('jumbo')
         
 
-        <main>   
+        <main> 
+            <!-- message section that shows only when a messagge is passed -->
+            @if(session()->has('message'))
+                <div class="alert alert-success" role="alert">
+                    <strong>Success</strong> {{session()->get('message')}}
+                </div>
+            @endif
+            <!-- message section that shows only when a messagge is passed -->
+
             @yield('content')
         </main>
     </div>
@@ -254,6 +265,8 @@
         </footer>
             <!-- Footer -->
 
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 </html>

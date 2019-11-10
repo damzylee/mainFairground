@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Review;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,11 @@ class CompanyController extends Controller
     public function index(Company $company)
     {
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        $reviews = Review::where('company_id', '=', $company->id)->get();
         
         $company = Company::findOrFail($company);
 
-        return view('company.index', compact('company', 'companies'));
+        return view('company.index', compact('company', 'companies', 'reviews'));
     }
 
     /**
@@ -53,7 +55,13 @@ class CompanyController extends Controller
         $company = Company::findOrFail($company);
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
-        return view('company.index', compact('company', 'companies'));
+        //not sure
+        $reviews = Review::where('company_id', '=', $company->id)->get();
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+        //not sure
+
+        return view('company.index', compact('company', 'companies', 'reviews', 'services'));
     }
 
     /**
@@ -83,10 +91,12 @@ class CompanyController extends Controller
         }
         //end
 
+        $reviews = Review::where('company_id', '=', $company->id)->get();
+
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('company', 'companies', 'services'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
     }
 
     /**
@@ -133,11 +143,12 @@ class CompanyController extends Controller
         //get all the companies owned by the host
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
+        $reviews = Review::where('company_id', '=', $company->id)->get();
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('company', 'companies', 'services'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
     }
 
     /**
@@ -153,11 +164,12 @@ class CompanyController extends Controller
         //get all the companies owned by the host
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
+        $reviews = Review::where('company_id', '=', $company->id)->get();
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('company', 'companies', 'services'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
 
     }
 

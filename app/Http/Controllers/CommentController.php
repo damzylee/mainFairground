@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Subscribe;
-use App\Subscription;
-use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 
-class SubscribeController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -26,9 +24,7 @@ class SubscribeController extends Controller
      */
     public function create()
     {
-        $subscriptions = Subscription::all();
-
-        return view('subscription.subscribe', compact('subscriptions'));
+        //
     }
 
     /**
@@ -39,37 +35,27 @@ class SubscribeController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subscribe  $subscribe
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Subscription $subscribe)
+    public function show(Comment $comment)
     {
-        $subscriptions = Subscription::findOrFail($subscribe);
-        $subscription = $subscriptions[0];
-        
-        $user = User::findOrFail(auth()->user()->id);
-        $user->update([
-            'subscription_id' => $subscription->id,
-            'type' => 'host' 
-        ]);
-        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
-        
-        return view('subscription.success', compact('subscription', 'companies'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subscribe  $subscribe
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subscribe $subscribe)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -78,10 +64,10 @@ class SubscribeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subscribe  $subscribe
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscribe $subscribe)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -89,10 +75,10 @@ class SubscribeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subscribe  $subscribe
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscribe $subscribe)
+    public function destroy(Comment $comment)
     {
         //
     }
