@@ -13,7 +13,7 @@ class DropType extends Migration
      */
     public function up()
     {
-
+        Schema::dropIfExists('type');;
     }
 
     /**

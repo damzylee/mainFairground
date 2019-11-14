@@ -35,7 +35,7 @@
             <div class="">
                 @if(Auth::user()->type === 'user')
                     <div class="p-2">
-                        <a href="reviewCom/create"><button class="btn btn-outline-info">make review</button></a>
+                        <a href="/reviewCom/create"><button class="btn btn-outline-info">make review</button></a>
                     </div>
                 @else
                     @if(count($requests) > 0)

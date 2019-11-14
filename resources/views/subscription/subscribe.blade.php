@@ -16,10 +16,9 @@
         <div id="subscriptions" class="container my-5">
             <div class="card-group text-center">
                 @foreach($subscriptions as $subscription)
-                @if($i == $subscriptioncount)
-                    <div class="card text-center">
-                            
+                <div class="card text-center mx-2">
                     <div class="row no-gutters">
+                @if($i == $subscriptioncount)
                         <div class="col-md-4">
                             <img src="../storage/uploads/sub.png" class="card-img h-100" alt="subscribe">
                         </div>
@@ -32,12 +31,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
+        
 
                 @else
-                    <div class="card text-center">
-                    <div class="row no-gutters">
+        
                         <div class="col-md-4">
                             <img src="../storage/uploads/sub.png" class="card-img h-100" alt="subscribe">
                         </div>
@@ -50,17 +47,16 @@
                                 
                             </div>
                         </div>
-                    </div>
-                </div>
+        
                 @endif
 
                 @if($i%3 == 0)
 
-                </div></div><div class="card-group text-center">
+                </div></div><div class="card-group text-center mx-2">
 
                 @else
 
-                </div>
+                </div></div>
 
                 @endif
 

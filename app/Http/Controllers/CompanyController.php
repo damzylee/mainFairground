@@ -48,7 +48,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $company = Company::create($this->requestValidation());
+        $mad = $this->requestValidation();
+        $mad["type"] = 'company';
+        
+        $company = Company::create($mad);
 
         $this->storeImage($company);
         $company->update([
@@ -57,9 +60,9 @@ class CompanyController extends Controller
 
         $company = Company::findOrFail($company);
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
-
         //not sure
         $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
+        dd($reviews);
         $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();

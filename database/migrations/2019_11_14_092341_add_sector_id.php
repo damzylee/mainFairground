@@ -26,7 +26,7 @@ class AddSectorId extends Migration
     public function down()
     {
         Schema::table('companies', function (Blueprint $table) {
-            Schema::dropColumn('sector_id');
+            Schema::dropIfExists('sector_id');
         });
     }
 }

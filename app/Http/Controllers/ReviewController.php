@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Review;
 use App\Company;
 use App\Comment;
+use App\Service;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -46,17 +47,19 @@ class ReviewController extends Controller
 
     public function companyPost()
     {
-        $mad = $this->requestValidation();
+        //trying to get the company that is active at the moment
+        $company = Company::where('confirm', '=', '1')->get();
+        $company = $company[0];
+
+        $mad = $this->requestValidation2();
         $mad["user_id"] = auth()->user()->id;
+        $mad["company_id"] = $company->id;
         // dd($mad);
 
         $review = Review::create($mad);
 
         $this->storeImage($review);
 
-        //trying to get the company that is active at the moment
-        $company = Company::where('confirm', '=', '1')->get();
-        $company = $company[0];
         
         //not sure
         $reviews = Review::where('company_id', '=', $company->id)->get();
@@ -161,6 +164,21 @@ class ReviewController extends Controller
         return tap(request()->validate([
             'review' => 'required | max:255',
             'company_id' => 'required'
+
+        ]), function(){
+
+            if(request()->hasFile('image')){
+                request()->validate([
+                    'image' => 'file|image|max:10000'
+                ]);
+            }
+        });
+    }
+
+    protected function requestValidation2()
+    {
+        return tap(request()->validate([
+            'review' => 'required | max:255',
 
         ]), function(){
 

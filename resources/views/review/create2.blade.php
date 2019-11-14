@@ -14,7 +14,7 @@
 
             <div class="form-group">
                 <label for="review">Review:</label>
-                <textarea name="review" id="review" class="form-control" cols="60" rows="10">enter your review...</textarea>
+                <textarea name="review" id="review" class="form-control" cols="60" rows="10" placeholder="enter your review..."></textarea>
                 <div>{{$errors->first('review')}}</div>
             </div>
             

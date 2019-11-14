@@ -14,7 +14,7 @@
 Route::get('/', function () {
     $companiess = App\Company::paginate(8);
     $sectors = App\Sectors::paginate(8);
-    
+
     return view('welcome', compact('companiess', 'sectors'));
 });
 
@@ -35,7 +35,7 @@ Route::get('/delete', 'CompanyController@deleteCompany');
 Route::resource('/service', 'ServiceController');
 Route::resource('/review', 'ReviewController');
 Route::post('/reviewCom', 'ReviewController@companyPost');
-Route::post('/reviewCom/create', 'ReviewController@companyPostView');
+Route::get('/reviewCom/create', 'ReviewController@companyPostView');
 Route::resource('/request', 'MakeRequestController');
 Route::get('/requestAll/{company}', 'MakeRequestController@showAll');
 Route::resource('/comment', 'CommentController');
