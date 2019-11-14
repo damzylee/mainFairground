@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Company;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -34,6 +35,38 @@ class ReviewController extends Controller
         return view('review.create', compact('review', 'companies'));
     }
 
+    public function companyPostView()
+    {
+        $review = new Review();
+
+        $companies = Company::all();
+
+        return view('review.create2', compact('review', 'companies'));
+    }
+
+    public function companyPost()
+    {
+        $mad = $this->requestValidation();
+        $mad["user_id"] = auth()->user()->id;
+        // dd($mad);
+
+        $review = Review::create($mad);
+
+        $this->storeImage($review);
+
+        //trying to get the company that is active at the moment
+        $company = Company::where('confirm', '=', '1')->get();
+        $company = $company[0];
+        
+        //not sure
+        $reviews = Review::where('company_id', '=', $company->id)->get();
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+        //not sure
+
+        return view('company.index', compact('company', 'services', 'reviews'))->with('message', 'Review was successfully posted.');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -50,7 +83,7 @@ class ReviewController extends Controller
 
         $this->storeImage($review);
 
-        return redirect('home');
+        return redirect('home')->with('message', 'Review was successfully posted.');
     }
 
     /**
@@ -61,8 +94,28 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
+        if(auth()->guest()) 
+        {
+            $companies = [];
+            $company = Company::where('id', '=', $review['company_id'])->get();
+        }
+        else{
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         
-        return view('review.show', 'review');
+
+        //trying to get the company that is active at the moment
+        $company = Company::where('user_id', '=', auth()->user()->id)->where('confirm', '=', '1')->get();
+        }
+        if(count($company)){
+            $company = $company[0];
+        }
+        else{
+            $company = Company::where('id', '=', $review['company_id'])->get();
+            $company = $company[0];
+        }
+        $comments = Comment::where('review_id', '=', $review->id)->orderBy('id', 'desc')->get();
+        
+        return view('review.show', compact('review', 'companies', 'company', 'comments'));
     }
 
     /**

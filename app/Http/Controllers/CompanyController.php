@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Review;
 use App\Service;
+use App\MakeRequest;
+use App\Sectors;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -17,7 +19,7 @@ class CompanyController extends Controller
     public function index(Company $company)
     {
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
-        $reviews = Review::where('company_id', '=', $company->id)->get();
+        $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         
         $company = Company::findOrFail($company);
 
@@ -33,8 +35,9 @@ class CompanyController extends Controller
     {
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         $company = new Company();
+        $sectors = Sectors::all();
 
-        return view('company.create', compact('company', 'companies'));
+        return view('company.create', compact('company', 'companies', 'sectors'));
     }
 
     /**
@@ -56,12 +59,13 @@ class CompanyController extends Controller
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
         //not sure
-        $reviews = Review::where('company_id', '=', $company->id)->get();
+        $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
         //not sure
 
-        return view('company.index', compact('company', 'companies', 'reviews', 'services'));
+        return view('company.index', compact('company', 'companies', 'reviews', 'services', 'requests'))->with('message', 'Company has been created successfully');;
     }
 
     /**
@@ -72,31 +76,43 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        if(auth()->guest()) 
+        {
+            $companies = '';
+            // dd($company);
+        }
+        else{
+            $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
-        //finding and setting the active company of a user to one so i can be able to use if i need its id later and setting others to zero
-        $find = Company::findOrFail($company->id);
-        if($find->confirm == 0){
-            $find->update([
-                'confirm' => 1
-                ]);
+            Company::where('confirm', '=', 1)->update(['confirm' => 0]);
 
-            foreach($companies as $companys){
-                if($companys->id !== $find->id){
-                    $companys->update([
-                        'confirm' => 0
+            //finding and setting the active company of a user to one so i can be able to use if i need its id later and setting others to zero
+            $find = Company::findOrFail($company->id);
+            if($find->confirm == 0){
+                $find->update([
+                    'confirm' => 1
                     ]);
+    
+                foreach($companies as $companys){
+                    if($companys->id !== $find->id){
+                        $companys->update([
+                            'confirm' => 0
+                        ]);
+                    }
                 }
             }
+            //end
         }
-        //end
 
-        $reviews = Review::where('company_id', '=', $company->id)->get();
+
+
+        $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews', 'requests'));
     }
 
     /**
@@ -112,8 +128,9 @@ class CompanyController extends Controller
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
+        $sectors = Sectors::all();
 
-        return view('company.edit', compact('company', 'companies', 'services'));
+        return view('company.edit', compact('company', 'companies', 'services', 'sectors'));
     }
 
     public function deleteCompany(Company $company)
@@ -143,12 +160,13 @@ class CompanyController extends Controller
         //get all the companies owned by the host
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
-        $reviews = Review::where('company_id', '=', $company->id)->get();
+        $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews', 'requests'))->with('message', 'Company details updated successfully');;
     }
 
     /**
@@ -164,12 +182,13 @@ class CompanyController extends Controller
         //get all the companies owned by the host
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
-        $reviews = Review::where('company_id', '=', $company->id)->get();
+        $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
+        $sectors = Sectors::paginate(6);
 
-        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
+        return view('home', compact('company', 'companies', 'services', 'reviews', 'sectors'))->with('message', 'Company has successfully been deleted');;
 
     }
 
@@ -183,7 +202,7 @@ class CompanyController extends Controller
             'country' => 'required | min:3',
             'state' => 'required | min:3',
             'address' => 'required | min:7',
-            'type' => 'required',
+            'sector_id' => 'required',
             'profile' => 'required | max:500',
             'YOE' => 'required | date | before_or_equal:today'
         ]), function(){

@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
 @section('content')
-    <div id="view">
+    <div>
         <div class="card bg-dark text-white text-center" >
             <img src="../storage/{{$company->image}}" class="card-img" alt="Successful"   style="height: 500px; opacity:60%;">
             <div class="card-img-overlay mt-5">
@@ -18,11 +18,87 @@
             </div>
         </div>
 
+        @auth
+        <!-- button -->
+        <div class="container d-flex justify-content-center">
+            <div>
+                @if(Auth::user()->type == 'host')
+                <div class="p-2">
+                    <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
+                </div>
+                @else
+                <div class="p-2">
+                    <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
+                </div>
+                @endif
+            </div>
+            <div class="">
+                @if(Auth::user()->type === 'user')
+                    <div class="p-2">
+                        <a href="reviewCom/create"><button class="btn btn-outline-info">make review</button></a>
+                    </div>
+                @else
+                    @if(count($requests) > 0)
+                    <div class="p-2">
+                        <a href="/requestAll/{{$company->id}}"><button class="btn btn-outline-info">view request</button></a>
+                    </div>
+                    @else
+                    <div class="p-2">
+                        <a href="/requestAll/{{$company->id}}"><button class="btn btn-outline-info" disabled>view request</button></a>
+                    </div>
+                    @endif
+                @endif
+            </div>
+
+            @if(Auth::user()->id == $company->user_id)
+                    <div class="p-2">
+                        <a href="/company/{{$company->id}}/edit"><button class="btn btn-light">edit company's details</button></a>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModalCenter3">deactivate company</button>
+                    </div>
+
+                    <!-- Modal for deactivating an account -->
+            <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalCenterTitle">ARE YOU SURE YOU WANT TO DEACTIVATE YOUR COMPANY'S ACCOUNT?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="text-center">
+                                    <h6>{{$company->name}} would be deactivated on click of "deactivate account" button. Be sure before clicking.</h6>
+
+                                    <form action="{{$company->id}}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger form-control">Deactivate</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary form-control mt-2" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                @endif
+
+            </div>
+            <!-- Modal for deactivating an account-->
+ 
+        </div>
+        </div>
+        <!-- button -->
+
+        @endauth
 
         <div class="container my-5">
             <div class="row">
-                <h3 class="text-center">Services offered by {{$company->name}}</h3>
-                <div class="col-9">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <h3 class="">Services offered by {{$company->name}}</h3>
+                <div>
                     @if(count($services) > 0)
                     <?php
                         $i = 1;
@@ -47,52 +123,31 @@
                     @endforeach
                     @endif
                 </div>
-
-                <div class="col-3">
-                    @if(Auth::user()->companies)
-                        <div class="p-2">
-                            <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
-                        </div>
-                    @else
-                        <div class="p-2">
-                            <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
-                        </div>
-                    @endif
-                </div>
             </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <h3>Location</h3>
+                <p>{{$company->address}},</p>
+                <p>{{$company->state}}, {{$company->country}}</p>
+                <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
+            </div>
+        </div>
         </div>
 
         <div class="container my-5">
-            <div class="row">
-                <div class="col-9">
-                    <h3>Location</h3>
-                    <p>{{$company->address}},</p>
-                    <p>{{$company->state}}, {{$company->country}}</p>
-                    <p class="card-text"><small class="text-muted">Mail us at {{$company->email}} or call {{$company->number}}</small></p>
-                </div>
-                <div class="col-3">
-                    <div class="p-2">
-                        <a href="/company/{{$company->id}}/edit"><button class="btn btn-light">edit company's details</button></a>
-                    </div>
-                    <div class="p-2 m-2">
-                        <button class="btn btn-outline-warning" id="show">deactivate company</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <h1 class="text-center">Reviews on {{$company->name}}</h1>
+                <hr>
+            <div class="my-5">
 
-        <div class="container my-5">
-            <div class="row">
-                <div class="col-9">
-                    <h1>Reviews on {{$company->name}}</h1>
-                    <hr>
                     @foreach($reviews as $review) 
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"/>
-                                    <p class="text-secondary text-center">{{$review->created_at}}</p>
+                                    <a class="float-left" href="/review/{{$review->id}}">
+                                        <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"/>
+                                        <p class="text-secondary text-center">{{$review->created_at}}</p>
+                                    </a>
                                 </div>
                                 <div class="col-md-10">
                                     <p>
@@ -105,16 +160,22 @@
                                     </p>
 
                                 <div class="clearfix"></div>
-                                    <p class="py-3">{{$review->review}}</p>
-                                    
+                                    <p class="py-3">{{$review->review}}</p>                 
                                 </div>
                             </div>
                         </div>
+                @auth
                         <div class="card-footer" style="padding: .1rem;">
-                            <p>
+                            <p class="float-right">
+                            @if(Auth::user()->id == $review->user->id)
                                 <a class="float-right btn btn-outline-danger ml-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                            @endif
                                 <a class="float-right btn btn-outline-primary ml-2" data-toggle="modal" data-target="#exampleModalCenter2"> <i class="fa fa-comment"></i></a>
                                 <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a>
+                            </p>
+                            <p class="float-left">
+                                <span>comments</span>
+                                <span>likes</span>
                             </p>
 
                 <!-- Modal for deleting review-->
@@ -175,63 +236,14 @@
                 </div>
             </div>
             <!-- Modal for creating comment-->
-
-
-
-                            </div>
+        
                         </div>
+                @endauth
                     </div>
                 </div>                                
                 @endforeach
-
-
-                        
-                    <div class="col-3 mt-4">
-                    @if(Auth::user()->type === 'user')
-                        <div class="p-2">
-                            <a href="/review/create"><button class="btn btn-outline-info">make review</button></a>
-                        </div>
-                    @endif
-                </div>
             </div>
         </div>
     </div>
 
-    <div class="container my-5"  id="delete">
-        <div class="text-center">
-            <h1 class="my-3 p-3">ARE YOU SURE YOU WANT TO DEACTIVATE YOUR COMPANY'S ACCOUNT?</h1>
-            </div>
-        <div>
-
-        <div class="container my-5">
-            <div class="row text-center">
-                <div class="col-12">
-                    <h5>{{$company->name}} would be deactivated on click of "deactivate account" button. Be sure before clicking.</h5>
-                    <p ><a href="{{$company->id}}/edit">Edit</a></p>
-
-                    <form action="{{$company->id}}" method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger form-control">DEACTIVATE ACCOUNT</button>
-                    </form>
-                </div>
-            </div>
-            <button class="btn btn-warning form-control my-3" id="hide">CANCEL</button>
-        </div>
-    </div> 
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $("#delete").hide();
-                $("#hide").click(function(){
-                    $("#delete").hide();
-                    $("#view").show();
-                });
-                $("#show").click(function(){
-                    $("#delete").show();
-                    $("#view").hide();
-                });
-            });
-        </script>
 @endsection

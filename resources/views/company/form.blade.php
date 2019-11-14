@@ -2,43 +2,47 @@
         @csrf
             <div class="form-group">
                     <label for="name">Name:</label>
-                <input type="text" name="name" value="{{old('name') ?? $company->name}}" class="form-control">
+                <input type="text" name="name" id="name" value="{{old('name') ?? $company->name}}" class="form-control">
                 <div>{{$errors->first('name')}}</div>
             </div>
             
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" name="email" value="{{old('email') ?? $company->email}}" class="form-control">
+                <input type="text" name="email" id="email" value="{{old('email') ?? $company->email}}" class="form-control">
                 <div>{{$errors->first('email')}}</div>
             </div>
             
             <div class="form-group">
                 <label for="number">Phone number:</label>
-                <input type="text" name="number" value="{{old('number') ?? $company->number}}" class="form-control">
+                <input type="text" name="number" id="number" value="{{old('number') ?? $company->number}}" class="form-control">
                 <div>{{$errors->first('number')}}</div>
             </div>
 
             <div class="form-group">
-                <label for="type">Company Type:</label>
-                <input type="text" name="type" value="{{old('type') ?? $company->type}}" class="form-control">
-                <div>{{$errors->first('type')}}</div>
-            </div>
+                <label for="sector_id">Sector:</label>
+                <select name="sector_id" id="sector_id" class="form-control">
+                    @foreach($sectors as $sector)
+                    <option value="{{$sector->id}}"{{$sector->id == $company->sector_id ? 'selected' : ''}}>{{$sector->name}}</option>
+                    @endforeach
+                </select>
+                <div>{{$errors->first('sector_id')}}</div>
+            </div> 
 
             <div class="form-group">
                     <label for="country">Country:</label>
-                <input type="text" name="country" value="{{old('country') ?? $company->country}}" class="form-control">
+                <input type="text" name="country" id="country" value="{{old('country') ?? $company->country}}" class="form-control">
                 <div>{{$errors->first('country')}}</div>
             </div>
             
             <div class="form-group">
                 <label for="state">State:</label>
-                <input type="text" name="state" value="{{old('state') ?? $company->state}}" class="form-control">
+                <input type="text" name="state" id="state" value="{{old('state') ?? $company->state}}" class="form-control">
                 <div>{{$errors->first('state')}}</div>
             </div>
             
             <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" name="address" value="{{old('address') ?? $company->address}}" class="form-control">
+                <input type="text" name="address" id="address" value="{{old('address') ?? $company->address}}" class="form-control">
                 <div>{{$errors->first('address')}}</div>
             </div>
 

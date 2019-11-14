@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Subscribe;
 use App\Subscription;
+use App\Company;
 use App\User;
 use Illuminate\Http\Request;
 

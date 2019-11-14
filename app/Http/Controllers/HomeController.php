@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use App\Company;
-
+use App\Sectors;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,23 +25,28 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $companiess = Company::paginate(6);
+        $sectors = Sectors::paginate(6);
+
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         if(auth()->user()->is_admin == 1){
-            return redirect('admin', compact('companies'));
+            return redirect('admin', compact('companies', 'companiess', 'sectors'));
         }
         else{
-            return view('home', compact('companies'));
+            return view('home', compact('companies', 'companiess', 'sectors'));
         }
     }
 
     public function admin()
     {
+        $companiess = Company::paginate(6);
+        $sectors = Sectors::paginate(6);
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         if(auth()->user()->is_admin == 1){
-            return redirect('admin', compact('companies'));
+            return redirect('admin', compact('companies', 'companiess', 'sectors'));
         }
         else{
-            return view('home', compact('companies'));
+            return view('home', compact('companies', 'companiess', 'sectors'));
         }
     }
 
@@ -66,7 +71,7 @@ class HomeController extends Controller
             'number' => 'required | numeric',
             'country' => 'required | min:3',
             'state' => 'required | min:3',
-            'town' => 'min:7',
+            'town' => 'min:3',
             'BIOS' => 'max:255',
             'DOB' => 'date | before_or_equal:today'
 

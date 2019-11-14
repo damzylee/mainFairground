@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $companiess = App\Company::paginate(8);
+    $sectors = App\Sectors::paginate(8);
+    
+    return view('welcome', compact('companiess', 'sectors'));
 });
 
 Auth::routes();
@@ -26,10 +29,16 @@ Route::delete('/{user}', 'HomeController@destroy');
 
 Route::resource('/subscription', 'SubscriptionController');
 Route::resource('/subscribe', 'SubscribeController');
+Route::resource('/sector', 'SectorsController');
 Route::resource('/company', 'CompanyController');
 Route::get('/delete', 'CompanyController@deleteCompany');
 Route::resource('/service', 'ServiceController');
 Route::resource('/review', 'ReviewController');
+Route::post('/reviewCom', 'ReviewController@companyPost');
+Route::post('/reviewCom/create', 'ReviewController@companyPostView');
+Route::resource('/request', 'MakeRequestController');
+Route::get('/requestAll/{company}', 'MakeRequestController@showAll');
 Route::resource('/comment', 'CommentController');
+Route::post('/commentrequest', 'CommentController@storeRequest');
 Route::resource('/like', 'LikeController');
 

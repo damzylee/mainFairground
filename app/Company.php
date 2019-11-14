@@ -42,6 +42,12 @@ class Company extends Model
     
     }
 
+    public function sector(){
+
+        return $this->belongsTo('App\Sectors');
+    
+    }
+
     public function entity(){
 
         return $this->belongsTo('App\Entity');

@@ -4,13 +4,8 @@
 <div class="jumbotron jumbotron-fluid p-0">
     <img src="images/user.jpeg" alt="dashboard image" class="card-img w-100" style="height: 600px; opacity:70%;">
     <div class="container card-img-overlay text-center text-white" style="margin-top: 200px;">
-        <h1 class="display-4">FAIRGROUND</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p>
+        <h1 class="display-4" style="font-size: 500%; font-weight: bold;">FAIRGROUND</h1>
+        <p class="lead mt-5" style="font-size: 150%;">“Nature fits all her children with something to do, he who would write and can't write, can surely review.” <b>―</b><i> James Russell Lowell</i></p>
     </div>
 </div>
 @endsection
@@ -70,8 +65,66 @@
         </div>
 
         <div class="col-8">
+        <h2>Companies</h2>
             <div class="card my-4 text-center">
 
+            @if(count($companiess) > 0)
+                <?php
+                    $companycount = count($companiess);
+                    $i = 1;
+                ?>
+
+                <div id="companiess">
+                    <div class="row text-center">
+                        @foreach($companiess as $company)
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                        @if($i === $companycount)
+                                <a href="company/{{$company->id}}">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                </a>
+                                <br>
+                                <a href="company/{{$company->id}}">
+                                    <span>{{$company->name}}</span> 
+                                </a>
+                        @else
+                           
+                                <a href="company/{{$company->id}}">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                </a>
+                                <br>
+                                <a href="company/{{$company->id}}">
+                                    <span>{{$company->name}}</span> 
+                                </a>
+                           
+                        @endif
+
+                        @if($i%3 == 0)
+
+                        </div></div><div class="row text-center">
+                            
+
+                        @else
+
+                        </div>
+
+                        @endif
+
+                        <?php 
+                            $i++;
+                        ?>
+
+                        @endforeach
+                        
+                    </div>
+                </div>
+                @else
+                <p>No company to display</p>
+                @endif
+
+
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $companiess->links() }}
             </div>
         </div>
     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use App\Company;
+use App\Review;
+use App\MakeRequest;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -60,12 +62,12 @@ class ServiceController extends Controller
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
-
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         
         $reviews = Review::where('company_id', '=', $company->id)->get();
 
         //redirect to company page after adding a service
-        return view('company.index', compact('company', 'companies', 'services', 'reviews'));
+        return view('company.index', compact('company', 'companies', 'services', 'reviews', 'requests'));
     }
 
     /**
@@ -144,10 +146,11 @@ class ServiceController extends Controller
 
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         
         $reviews = Review::where('company_id', '=', $company->id)->get();
 
-        return view('company.index', compact('services', 'company', 'companies', 'reviews'));
+        return view('company.index', compact('services', 'company', 'companies', 'reviews', 'requests'));
     }
 
     protected function requestValidation()

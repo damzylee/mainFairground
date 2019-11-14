@@ -6,6 +6,7 @@ use App\Comment;
 use App\Company;
 use App\Review;
 use App\Service;
+use App\MakeRequest;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -51,11 +52,33 @@ class CommentController extends Controller
 
         //not sure
         $reviews = Review::where('company_id', '=', $company->id)->get();
+        // $review = Review::where('id', '=', $request->review_id)->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
+        //get services with the id of the company
+        $services = Service::where('company_id', '=', $company->id)->get();
+        $comments = Comment::where('review_id', '=', $request->review_id)->orderBy('id', 'desc')->get();
+        //not sure
+
+        return view('company.index', compact('company', 'companies', 'reviews', 'services', 'requests', 'comments'));
+    }
+
+    public function storeRequest(Request $request)
+    {
+        $mad = $this->requestValidation2();
+        $mad["user_id"] = auth()->user()->id;
+        $comment = Comment::create($mad);
+
+        $company = Company::findOrFail($request['company_id']);
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+        //not sure
+        $reviews = Review::where('company_id', '=', $company->id)->get();
+        $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();
         //not sure
 
-        return view('company.index', compact('company', 'companies', 'reviews', 'services'));
+        return view('company.index', compact('company', 'companies', 'reviews', 'services', 'requests'));
     }
 
     /**
@@ -111,6 +134,14 @@ class CommentController extends Controller
         return request()->validate([
             'comment' => 'required',
             'review_id' => 'required',
+            'company_id' => 'required'
+    ]);
+    }
+
+    protected function requestValidation2(){
+        return request()->validate([
+            'comment' => 'required',
+            'make_request_id' => 'required',
             'company_id' => 'required'
     ]);
     }
