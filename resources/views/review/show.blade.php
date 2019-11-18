@@ -29,35 +29,20 @@
 
                         <div class="clearfix"></div>
                             <p class="py-3">{{$review->review}}</p>
+                            @auth
+                            @if(Auth::user()->type == 'user')
                             <p>
                                 <a class="float-right btn btn-outline-primary ml-2" data-toggle="modal" data-target="#exampleModalCenter2"> <i class="fa fa-comment"></i></a>
                                 <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a>
                             </p>
-
+                            @else
+                            @endif
+                            @endauth
                         </p>
                         </div>
                     </div>
-                        <div class="card card-inner">
-                            @foreach($comments as $comment)
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="../storage/{{$comment->user->image}}" class="img img-rounded img-fluid"/>
-                                        <p class="text-secondary text-center">15 Minutes Ago</p>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <p><strong>{{$comment->user->name}}</strong></p>
-                                        <p>{{$comment->comment}}</p>
-                                        <p>
-                                        <a class="float-right btn btn-outline-danger ml-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
-                                        <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a>
-                                    </p>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
                 </div>
+               
                 <!-- Modal for creating comment-->
             <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -95,5 +80,31 @@
 
             </div>
         </div>
+        <h2 class="my-3 text-center">Comments</h2>
+        @foreach($comments as $comment)
+            <div class="card card-inner">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="../storage/{{$comment->user->image}}" class="img img-rounded img-fluid"/>
+                            <p class="text-secondary text-center">15 Minutes Ago</p>
+                        </div>
+                        <div class="col-md-10">
+                            <p><strong>{{$comment->user->name}}</strong></p>
+                            <p>{{$comment->comment}}</p>
+                            @auth
+                            <p>
+                                @if(Auth::user()->id == $comment->user->id)
+                            <a class="float-right btn btn-outline-danger ml-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                            @else
+                            @endif
+                            <!-- <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a> -->
+                        </p>
+                        @endauth
+                        </div>
+                    </div>
+                </div>
+            </div>
+                @endforeach
     </div>
 @endsection

@@ -33,8 +33,11 @@ class ServiceController extends Controller
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
 
         //trying to get the company that is active at the moment
-        $company = Company::where('user_id', '=', auth()->user()->id)->where('confirm', '=', '1')->get();
+        $company = Company::where('user_id', '=', auth()->user()->id)->where('confirm', '=', 1)->get();
+
         $company = $company[0];
+        // dd($company);
+
 
         return view('service.create', compact('service', 'companies', 'company'));
     }

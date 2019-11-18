@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="../fontawesome/css/fontawesome.min">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     </head>
     <body>
@@ -46,7 +47,7 @@
             
         </div>
 
-            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel" style="background: black;">
                 <div class="overlape">
                     <h1 class="text-center overlapetext">FAIRGROUND</h1>
                     <h5 class="text-center overlapetextsmall mt-5">Want direct interaction with companies?</h5>
@@ -99,7 +100,7 @@
                         <div class="col-md-3 col-sm-2 col-xs-1">
                         @if($i === $sectorcount)
                                 <a href="/sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="/sector/{{$sector->id}}">
@@ -109,7 +110,7 @@
                         @else
                            
                                 <a href="/sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="/sector/{{$sector->id}}">
@@ -143,9 +144,9 @@
 
 
             </div>
-            <div class="d-flex justify-content-center">
+            <!-- <div class="d-flex justify-content-center">
                 {{ $sectors->links() }}
-            </div>
+            </div> -->
 
 
             <h2>Companies</h2>
@@ -163,7 +164,7 @@
                         <div class="col-md-3 col-sm-2 col-xs-1">
                         @if($i === $companycount)
                                 <a href="/company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="/company/{{$company->id}}">
@@ -173,7 +174,7 @@
                         @else
                            
                                 <a href="/company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="/company/{{$company->id}}">
@@ -215,9 +216,45 @@
 
             <!-- FETCHING COMPANIES -->
 
+        
+        <!-- Contact us  -->
+
+        <div class="imageOn" style="background-color: url('/contact.jpeg'); background:rgba(0, 0, 0, 1)" >
+            <div class="jumbotron jumbotron-fluid jumbosco">
+                <div class="container">
+                    <h1 class="display-4">CONTACT US</h1>
+                    <form action="/contact" method="POST" class="">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" id="email" class="form-control">
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea name="message" id="message"  class="form-control" cols="60" rows="10"></textarea>
+                            <div class="text-danger">{{$errors->first('message')}}</div>
+                        </div>
+                        <input type="submit" value="SEND MAIL"  class="btn btn-primary form-control">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact us  -->
+
+
+
 
        <!-- Footer -->
-        <footer class="pt-4">
+       <footer class="pt-4 w-100" style="bottom:0%;">
 
             <!-- Footer Links -->
             <div class="container text-center text-md-left">
@@ -227,10 +264,8 @@
 
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
-                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                        consectetur
-                        adipisicing elit.
+                    <h6 class="text-uppercase mb-4 font-weight-bold">FAIRGROUND</h6>
+                    <p>Fairground connects you to companies and aim at making your opinion to count.
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -239,18 +274,18 @@
 
                 <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                    <h6 class="text-uppercase mb-4 font-weight-bold">About</h6>
                     <p>
-                        <a href="#!">MDBootstrap</a>
+                        <a href="#!">Contact</a>
                     </p>
                     <p>
-                        <a href="#!">MDWordPress</a>
+                        <a href="#!">Community</a>
                     </p>
                     <p>
-                        <a href="#!">BrandFlow</a>
+                        <a href="#!">Log in</a>
                     </p>
                     <p>
-                        <a href="#!">Bootstrap Angular</a>
+                        <a href="#!">Register</a>
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -267,9 +302,6 @@
                         <a href="#!">Become an Affiliate</a>
                     </p>
                     <p>
-                        <a href="#!">Shipping Rates</a>
-                    </p>
-                    <p>
                         <a href="#!">Help</a>
                     </p>
                 </div>
@@ -281,13 +313,13 @@
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
                 <p>
-                    <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <i class="fa fa-home mr-3"></i> Gbagada, Lagos, Nigeria</p>
                 <p>
-                    <i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+                    <i class="fa fa-envelope mr-3"></i> fairground@gmail.com</p>
                 <p>
-                    <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <i class="fa fa-phone mr-3"></i>+2348 137 896 883</p>
                 <p>
-                    <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                    <i class="fa fa-print mr-3"></i> + 01 549 678 89</p>
                 </div>
                 <!-- Grid column -->
 
@@ -304,8 +336,8 @@
 
                 <!--Copyright-->
                 <p class="text-center text-md-left">© 2018 Copyright:
-                    <a href="https://mdbootstrap.com/education/bootstrap/">
-                    <strong> MDBootstrap.com</strong>
+                    <a href="/">
+                    <strong>fairground.test</strong>
                     </a>
                 </p>
 
@@ -320,22 +352,22 @@
                     <ul class="list-unstyled list-inline">
                     <li class="list-inline-item">
                         <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                        <i class="fas fa-facebook-f"></i>
+                        <i class="fa fa-facebook-f"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
                         <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                        <i class="fas fa-twitter"></i>
+                        <i class="fa fa-twitter"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
                         <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                        <i class="fas fa-google-plus-g"></i>
+                        <i class="fa fa-google-plus-g"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
                         <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                        <i class="fas fa-linkedin-in"></i>
+                        <i class="fa fa-linkedin-in"></i>
                         </a>
                     </li>
                     </ul>

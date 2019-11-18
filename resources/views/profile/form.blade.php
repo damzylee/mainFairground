@@ -43,7 +43,7 @@
             </div>
             
             <div class="form-group">
-                <label for="DOB">Year of establishment:</label>
+                <label for="DOB">Date of birth:</label>
                 <input type="date" name="DOB" id="DOB" value="{{old('DOB') ?? $user->DOB}}" class="form-control">
                 <div>{{$errors->first('DOB')}}</div>
             </div>

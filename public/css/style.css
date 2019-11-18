@@ -179,3 +179,27 @@
             #gold {
                 color:gold;
             }
+
+            .imageOn {
+
+                background-image: url('/images/caro4.jpeg');
+                /* background-color: blue; */
+                background-attachment:fixed;
+        
+                /* height: 100vh;
+                 margin-top: -120px;
+                 padding-top:0; */
+            
+                background-size: cover;
+                z-index: -2;
+                position: relative;
+            }
+            
+            
+            .jumbosco {
+                /* padding-top: 40vh; */
+            
+                opacity: 0.9;
+                border:none;
+            
+            }

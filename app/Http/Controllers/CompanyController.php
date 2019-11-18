@@ -57,12 +57,14 @@ class CompanyController extends Controller
         $company->update([
             'user_id' => auth()->user()->id
         ]);
+        
+        // $company = Company::findOrFail($company);
+        // dd($company);
 
-        $company = Company::findOrFail($company);
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
         //not sure
         $reviews = Review::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
-        dd($reviews);
+        // dd($reviews);
         $requests = MakeRequest::where('company_id', '=', $company->id)->orderBy('id', 'desc')->get();
         //get services with the id of the company
         $services = Service::where('company_id', '=', $company->id)->get();

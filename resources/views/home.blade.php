@@ -86,7 +86,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12">
                         @if($i === $sectorcount)
                                 <a href="sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="sector/{{$sector->id}}">
@@ -95,7 +95,7 @@
                         @else
                            
                                 <a href="sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="sector/{{$sector->id}}">
@@ -129,9 +129,9 @@
 
 
             </div>
-            <div class="d-flex justify-content-center">
+            <!-- <div class="d-flex justify-content-center">
                 {{ $sectors->links() }}
-            </div>
+            </div> -->
 
 
             <h2 class="my-5">Companies</h2>
@@ -149,7 +149,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12">
                         @if($i === $companycount)
                                 <a href="company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="company/{{$company->id}}">
@@ -158,7 +158,7 @@
                         @else
                            
                                 <a href="company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
                                 </a>
                                 <br>
                                 <a href="company/{{$company->id}}">

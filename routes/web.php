@@ -42,3 +42,6 @@ Route::resource('/comment', 'CommentController');
 Route::post('/commentrequest', 'CommentController@storeRequest');
 Route::resource('/like', 'LikeController');
 
+// Route::get('/','ContactFormController@create');
+Route::post('/contact','ContactFormController@store');
+

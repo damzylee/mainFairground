@@ -23,9 +23,12 @@
         <div class="container d-flex justify-content-center">
             <div>
                 @if(Auth::user()->type == 'host')
-                <div class="p-2">
-                    <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
-                </div>
+                    @if(Auth::user()->id == $company->user_id)
+                    <div class="p-2">
+                        <a href="/service/create"><button class="btn btn-outline-primary">add service</button></a>
+                    </div>
+                    @else
+                    @endif
                 @else
                 <div class="p-2">
                     <a href="/request/create"><button class="btn btn-outline-primary">make a request</button></a>
@@ -38,14 +41,17 @@
                         <a href="/reviewCom/create"><button class="btn btn-outline-info">make review</button></a>
                     </div>
                 @else
-                    @if(count($requests) > 0)
-                    <div class="p-2">
-                        <a href="/requestAll/{{$company->id}}"><button class="btn btn-outline-info">view request</button></a>
-                    </div>
+                    @if(Auth::user()->id == $company->user_id)
+                        @if(count($requests) > 0 )
+                        <div class="p-2">
+                            <a href="/requestAll/{{$company->id}}"><button class="btn btn-outline-info">view request</button></a>
+                        </div>
+                        @else
+                        <div class="p-2">
+                        <button class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="No request available" disabled>view request</button>
+                        </div>
+                        @endif
                     @else
-                    <div class="p-2">
-                        <a href="/requestAll/{{$company->id}}"><button class="btn btn-outline-info" disabled>view request</button></a>
-                    </div>
                     @endif
                 @endif
             </div>
@@ -137,6 +143,8 @@
         <div class="container my-5">
                 <h1 class="text-center">Reviews on {{$company->name}}</h1>
                 <hr>
+
+            @if(count($reviews) > 0)
             <div class="my-5">
 
                     @foreach($reviews as $review) 
@@ -170,13 +178,15 @@
                             @if(Auth::user()->id == $review->user->id)
                                 <a class="float-right btn btn-outline-danger ml-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
                             @endif
+                                @if(Auth::user()->type == 'user')
                                 <a class="float-right btn btn-outline-primary ml-2" data-toggle="modal" data-target="#exampleModalCenter2"> <i class="fa fa-comment"></i></a>
-                                <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a>
+                                @endif
+                                <!-- <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a> -->
                             </p>
-                            <p class="float-left">
+                            <!-- <p class="float-left">
                                 <span>comments</span>
                                 <span>likes</span>
-                            </p>
+                            </p> -->
 
                 <!-- Modal for deleting review-->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -243,6 +253,9 @@
                 </div>                                
                 @endforeach
             </div>
+        @else
+        <p class="text-center">No review on {{$company->name}} yet. @if(Auth::user()->type == 'user')<a href="/review/create">Click here to review.</a>@else @endif</p>
+        @endif
         </div>
     </div>
 
