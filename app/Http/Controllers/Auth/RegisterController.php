@@ -14,7 +14,7 @@ class RegisterController extends Controller
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
-    |
+    |1
     | This controller handles the registration of new users as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
@@ -29,6 +29,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $redirectToAdmin = '/admin';
 
     /**
      * Create a new controller instance.

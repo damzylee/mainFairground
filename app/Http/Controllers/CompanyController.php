@@ -54,6 +54,7 @@ class CompanyController extends Controller
         $company = Company::create($mad);
 
         $this->storeImage($company);
+        
         $company->update([
             'user_id' => auth()->user()->id
         ]);

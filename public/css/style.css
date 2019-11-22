@@ -191,15 +191,15 @@
                  padding-top:0; */
             
                 background-size: cover;
-                z-index: -2;
+                z-index: -1;
                 position: relative;
             }
             
             
             .jumbosco {
                 /* padding-top: 40vh; */
-            
-                opacity: 0.9;
+                background: rgba(0, 0, 0, 0.3);
+                opacity: 30%;
                 border:none;
             
             }

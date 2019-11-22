@@ -4,8 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Company extends Model
+
+class Company extends Model implements Searchable
 {
     use SoftDeletes;
     protected $table = 'companies'; 
@@ -59,4 +62,17 @@ class Company extends Model
         return $this->belongsTo('App\Subscription');
     
     }
+
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('company.show', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->name,
+            $url
+         );
+    }
+
 }

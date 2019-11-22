@@ -2,8 +2,8 @@
 
 @section('content')
     <div>
-        <div class="card bg-dark text-white text-center" >
-            <img src="../storage/{{$company->image}}" class="card-img" alt="Successful"   style="height: 500px; opacity:60%;">
+        <div class="card bg-dark text-white text-center" style="background: black;">
+            <img src="../storage/{{$company->image}}" class="card-img" alt="Company's picture"   style="height: 500px; opacity:60%;">
             <div class="card-img-overlay mt-5">
                 <h1 class="card-title mt-5 text-xl">{{ $company->name }}</h1>
                 <p class="card-text mt-5">{{$company->name}} offers {{$company->type}} services.</p>

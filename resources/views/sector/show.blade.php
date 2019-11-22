@@ -29,7 +29,7 @@
                             <div class="col-md-3 col-sm-2 col-xs-1">
                             @if($i === $companycount)
                                     <a href="/company/{{$company->id}}">
-                                        <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                        <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                     </a>
                                     <br>
                                     <a href="/company/{{$company->id}}">
@@ -39,7 +39,7 @@
                             @else
                             
                                     <a href="/company/{{$company->id}}">
-                                        <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail">
+                                        <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                     </a>
                                     <br>
                                     <a href="/company/{{$company->id}}">

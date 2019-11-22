@@ -81,16 +81,15 @@
                                             <a class="dropdown-item" href="/company/{{$company->id}}">
                                             <i class="fa fa-building"></i> {{$company->name}}
                                             </a>
-                                            
                                         @endforeach
                                     </div>
                                 </li>
                             @endif
 
-
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="../storage/{{ Auth::user()->image }}" alt="" class="rounded-circle" style="width:30px; height:30px"> <span>{{ Auth::user()->name }}</span> <span class="caret"></span>
+                                <img src="../storage/{{ Auth::user()->image }}" alt="" class="rounded-circle" style="width:30px; height:30px"> <span>{{ Auth::user()->name }}</span> <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -139,7 +138,7 @@
 
     
               <!-- Footer -->
-              <footer class="pt-4 w-100" style="bottom:0%;">
+              <footer class="pt-4 w-100" style="position:absolute; bottom:0%; margin-left: auto; margin-right: auto;">
 
                 <!-- Footer Links -->
                 <div class="container text-center text-md-left">

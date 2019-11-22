@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Company;
 use App\Sectors;
+use App\Service;
 use Illuminate\Http\Request;
+use Spatie\Searchable\Search;
 
 class HomeController extends Controller
 {
@@ -29,6 +31,7 @@ class HomeController extends Controller
         $sectors = Sectors::paginate(6);
 
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+        
         if(auth()->user()->is_admin == 1){
             return redirect('admin', compact('companies', 'companiess', 'sectors'));
         }
@@ -42,12 +45,13 @@ class HomeController extends Controller
         $companiess = Company::paginate(6);
         $sectors = Sectors::paginate(6);
         $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
         if(auth()->user()->is_admin == 1){
-            return redirect('admin', compact('companies', 'companiess', 'sectors'));
+            return view('admin', compact('companies', 'companiess', 'sectors'));
         }
-        else{
-            return view('home', compact('companies', 'companiess', 'sectors'));
-        }
+        // else{
+        //     return view('home', compact('companies', 'companiess', 'sectors'));
+        // }
     }
 
     public function show(User $user)
@@ -105,5 +109,17 @@ class HomeController extends Controller
                 'image' => request()->image->store('uploads', 'public')
             ]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $searchResults = (new Search())
+            ->registerModel(Company::class, 'name')
+            ->registerModel(Sectors::class, 'name')
+            ->registerModel(Service::class, 'name')
+            ->perform($request->input('query'));
+        $companies = Company::where('user_id', '=', auth()->user()->id)->get();
+
+        return view('search', compact('searchResults', 'companies'));
     }
 }

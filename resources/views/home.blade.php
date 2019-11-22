@@ -1,7 +1,8 @@
+@if(Auth::user()->is_admin == 0)
 @extends('layouts.app2')
 
 @section('jumbo')
-<div class="jumbotron jumbotron-fluid p-0">
+<div class="jumbotron jumbotron-fluid p-0" style="background: black;">
     <img src="images/user.jpeg" alt="dashboard image" class="card-img w-100" style="height: 600px; opacity:70%;">
     <div class="container card-img-overlay text-center text-white" style="margin-top: 200px;">
         <h1 class="display-4" style="font-size: 500%; font-weight: bold;">FAIRGROUND</h1>
@@ -86,7 +87,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12">
                         @if($i === $sectorcount)
                                 <a href="sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="sector/{{$sector->id}}">
@@ -95,7 +96,7 @@
                         @else
                            
                                 <a href="sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="sector/{{$sector->id}}">
@@ -149,7 +150,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12">
                         @if($i === $companycount)
                                 <a href="company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="company/{{$company->id}}">
@@ -158,7 +159,7 @@
                         @else
                            
                                 <a href="company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="company/{{$company->id}}">
@@ -202,3 +203,7 @@
     </div>
 </div>
 @endsection
+
+@else 
+  <script>window.location = "/admin";</script>
+@endif

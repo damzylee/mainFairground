@@ -1,4 +1,6 @@
+
 @extends('layouts.app2')
+
 
 @section('jumbo')
 <div class="jumbotron jumbotron-fluid p-0">
@@ -9,6 +11,7 @@
     </div>
 </div>
 @endsection
+
 @section('content')
 
 <!-- <div class="container">

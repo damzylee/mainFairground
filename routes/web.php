@@ -26,6 +26,7 @@ Route::get('/{user}', 'HomeController@show');
 Route::get('/{user}/edit', 'HomeController@edit');
 Route::patch('/{user}', 'HomeController@update');
 Route::delete('/{user}', 'HomeController@destroy');
+Route::post('/search', 'HomeController@search')->name('search');
 
 Route::resource('/subscription', 'SubscriptionController');
 Route::resource('/subscribe', 'SubscribeController');

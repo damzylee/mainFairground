@@ -4,8 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Service extends Model
+
+class Service extends Model implements Searchable
 {
     use SoftDeletes;
 
@@ -39,5 +42,17 @@ class Service extends Model
 
         return $this->belongsTo('App\Entity');
     
+    }
+
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('services.show', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->name,
+            $url
+         );
     }
 }

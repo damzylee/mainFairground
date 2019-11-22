@@ -24,6 +24,8 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
+      
+                    
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
@@ -44,10 +46,14 @@
                     @endauth
                 </div>
             @endif
-            
+            <form action="{{ route('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+                @csrf
+                <input type="text" name="query" class="form-control mr-3" />
+                <input type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Search" />
+            </form>
         </div>
 
-            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel" style="background: black;">
+            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="overlape">
                     <h1 class="text-center overlapetext">FAIRGROUND</h1>
                     <h5 class="text-center overlapetextsmall mt-5">Want direct interaction with companies?</h5>
@@ -100,7 +106,7 @@
                         <div class="col-md-3 col-sm-2 col-xs-1">
                         @if($i === $sectorcount)
                                 <a href="/sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="/sector/{{$sector->id}}">
@@ -110,7 +116,7 @@
                         @else
                            
                                 <a href="/sector/{{$sector->id}}">
-                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $sector->image }}" alt="{{$sector->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="/sector/{{$sector->id}}">
@@ -164,7 +170,7 @@
                         <div class="col-md-3 col-sm-2 col-xs-1">
                         @if($i === $companycount)
                                 <a href="/company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="/company/{{$company->id}}">
@@ -174,7 +180,7 @@
                         @else
                            
                                 <a href="/company/{{$company->id}}">
-                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:80%">
+                                    <img src="../storage/{{ $company->image }}" alt="{{$company->name}}" class="img-thumbnail" style="width:100%; height:85%">
                                 </a>
                                 <br>
                                 <a href="/company/{{$company->id}}">
@@ -219,7 +225,7 @@
         
         <!-- Contact us  -->
 
-        <div class="imageOn" style="background-color: url('/contact.jpeg'); background:rgba(0, 0, 0, 1)" >
+        <div class="imageOn" style="background-color: url('/contact.jpeg');" >
             <div class="jumbotron jumbotron-fluid jumbosco">
                 <div class="container">
                     <h1 class="display-4">CONTACT US</h1>
