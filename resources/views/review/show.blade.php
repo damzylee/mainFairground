@@ -13,8 +13,8 @@
                     <div class="row">
                         <div class="col-md-2">
                             <a class="float-left" href="/review/{{$review->id}}">
-                                <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"/>
-                                <p class="text-secondary text-center">posted {{$review->created_at->diffForHumans()}}</p>
+                                <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"  style="width:100%; height:85%"/>
+                                <p class="text-secondary text-center">{{$review->created_at->diffForHumans()}}</p>
                             </a>
                         </div>
                         <div class="col-md-10">
@@ -80,14 +80,19 @@
 
             </div>
         </div>
-        <h2 class="my-3 text-center">Comments</h2>
+        @if(count($comments) == 1)
+            <h5 class="text-center my-4">Comment</h5>
+        @elseif(count($comments) > 1)
+            <h5 class="text-center my-4">Comments</h5>
+        @else
+        @endif
         @foreach($comments as $comment)
-            <div class="card card-inner">
+            <div class="card card-inner my-2">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="../storage/{{$comment->user->image}}" class="img img-rounded img-fluid"/>
-                            <p class="text-secondary text-center">15 Minutes Ago</p>
+                            <img src="../storage/{{$comment->user->image}}" class="img img-rounded img-fluid"  style="width:100%; height:120px"/>
+                            <p class="text-secondary text-center mt-2">{{$comment->created_at->diffForHumans()}}</p>
                         </div>
                         <div class="col-md-10">
                             <p><strong>{{$comment->user->name}}</strong></p>
@@ -95,7 +100,12 @@
                             @auth
                             <p>
                                 @if(Auth::user()->id == $comment->user->id)
-                            <a class="float-right btn btn-outline-danger ml-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                          
+                            <form action="/comment/{{$comment->id}}" class="mr-3 p-3" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button class="float-right btn btn-outline-danger ml-2"><i class="fa fa-trash"></i></button> 
+                            </form>
                             @else
                             @endif
                             <!-- <a class="float-right btn btn-outline-info  ml-2" href="/like/create"> <i class="fa fa-heart"></i></a> -->

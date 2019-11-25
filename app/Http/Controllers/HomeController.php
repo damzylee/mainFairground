@@ -96,9 +96,10 @@ class HomeController extends Controller
         return view('profile.show', compact('user', 'companies'));
     }
 
-    public function delete(User $user)
+    public function destroy(User $user)
     {
         $user->delete();
+        return redirect('/welcome');
     }
 
 

@@ -1,15 +1,28 @@
 @if(Auth::user()->is_admin == 0)
 @extends('layouts.app2')
 
-@section('jumbo')
-<div class="jumbotron jumbotron-fluid p-0" style="background: black;">
-    <img src="images/user.jpeg" alt="dashboard image" class="card-img w-100" style="height: 600px; opacity:70%;">
-    <div class="container card-img-overlay text-center text-white" style="margin-top: 200px;">
-        <h1 class="display-4" style="font-size: 500%; font-weight: bold;">FAIRGROUND</h1>
-        <p class="lead mt-5" style="font-size: 150%;">“Nature fits all her children with something to do, he who would write and can't write, can surely review.” <b>―</b><i> James Russell Lowell</i></p>
+@if(Auth::user()->type == 'user')
+    @section('jumbo')
+    <div class="jumbotron jumbotron-fluid p-0" style="background: black;">
+        <img src="images/user.jpeg" alt="dashboard image" class="card-img w-100" style="height: 690px; opacity:70%;">
+        <div class="container card-img-overlay text-center text-white" style="margin-top: 200px;">
+            <h1 class="display-4" style="font-size: 500%; font-weight: bold;">FAIRGROUND</h1>
+            <p class="lead mt-5" style="font-size: 150%;">“Nature fits all her children with something to do, he who would write and can't write, can surely review.” <b>―</b><i> James Russell Lowell</i></p>
+        </div>
     </div>
-</div>
-@endsection
+    @endsection
+@else
+    @section('jumbo')
+    <div class="jumbotron jumbotron-fluid p-0" style="background: black;">
+        <img src="images/company.jpeg" alt="dashboard image" class="card-img w-100" style="height: 690px; opacity:70%;">
+        <div class="container card-img-overlay text-center text-white" style="margin-top: 200px;">
+            <h1 class="display-4" style="font-size: 500%; font-weight: bold;">FAIRGROUND</h1>
+            <p class="lead mt-5" style="font-size: 150%;">“Nature fits all her children with something to do, he who would write and can't write, can surely review.” <b>―</b><i> James Russell Lowell</i></p>
+        </div>
+    </div>
+    @endsection
+@endif
+
 @section('content')
 
 <!-- <div class="container">
@@ -32,7 +45,7 @@
     </div>
 </div> -->
 
-<div class="container">
+<div class="container mb-5">
     <div class="row">
 
         <div class="col-md-4 col-sm-12 my-5">

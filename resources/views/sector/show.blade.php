@@ -3,13 +3,13 @@
 @section('content')
 
 <div>
-    <div class="card bg-dark text-white text-center" >
-        <img src="../storage/{{$sector->image}}" class="card-img" alt="Successful"   style="height: 500px; opacity:60%;">
-    </div>
+    <!-- <div class="card bg-dark text-white text-center" >
+        <img src="../storage/{{$sector->image}}" class="card-img" alt="Successful"   style="height: 650px; opacity:60%;">
+    </div> -->
 
     <div class="card-body text-center">
         <div class="p-4">
-            <h2 class="card-title ">{{$sector->name}} Sector</h2>
+            <h2 class="card-title ">{{$sector->name}} Companies</h2>
         </div>
     </div>
 

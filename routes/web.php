@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     $companiess = App\Company::paginate(8);
-    $sectors = App\Sectors::paginate(8);
+    $sectors = App\Sectors::orderBy('id', 'desc')->paginate(8);
 
     return view('welcome', compact('companiess', 'sectors'));
 });

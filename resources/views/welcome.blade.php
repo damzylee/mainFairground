@@ -53,7 +53,7 @@
             </form>
         </div>
 
-            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel" style="background:black;">
                 <div class="overlape">
                     <h1 class="text-center overlapetext">FAIRGROUND</h1>
                     <h5 class="text-center overlapetextsmall mt-5">Want direct interaction with companies?</h5>
@@ -63,15 +63,15 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active" data-interval="2000">
-                        <img src="images/caro1.jpeg" class="d-block w-100 welcome" alt="...">
+                        <img src="../images/caro1.jpeg" class="d-block w-100 welcome" alt="...">
                     </div>
                     
                     <div class="carousel-item" data-interval="2000">
-                        <img src="images/caro3.jpeg" class="d-block w-100 welcome" alt="...">
+                        <img src="../images/caro3.jpeg" class="d-block w-100 welcome" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="images/caro2.jpeg" class="d-block  w-100 welcome" alt="...">
+                        <img src="../images/caro2.jpeg" class="d-block  w-100 welcome" alt="...">
                     </div>
                     
                 </div>
@@ -225,14 +225,14 @@
         
         <!-- Contact us  -->
 
-        <div class="imageOn" style="background-color: url('/contact.jpeg');" >
+        <div class="imageOn">
             <div class="jumbotron jumbotron-fluid jumbosco">
-                <div class="container">
+                <div class="container jack" style="opacity:0.9">
                     <h1 class="display-4">CONTACT US</h1>
                     <form action="/contact" method="POST" class="">
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control" >
                             <div class="text-danger"></div>
                         </div>
                         

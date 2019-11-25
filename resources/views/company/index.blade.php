@@ -3,11 +3,11 @@
 @section('content')
     <div>
         <div class="card bg-dark text-white text-center" style="background: black;">
-            <img src="../storage/{{$company->image}}" class="card-img" alt="Company's picture"   style="height: 500px; opacity:60%;">
+            <img src="../storage/{{$company->image}}" class="card-img" alt="Company's picture"   style="height: 690px; opacity:70%;">
             <div class="card-img-overlay mt-5">
-                <h1 class="card-title mt-5 text-xl">{{ $company->name }}</h1>
-                <p class="card-text mt-5">{{$company->name}} offers {{$company->type}} services.</p>
-                <p class="card-text">Since {{$company->YOE}}</p>
+                <h1 class="card-title mt-5 text-xl"  style="font-size: 500%; font-weight: bold;">{{ $company->name }}</h1>
+                <p class="card-text mt-5" style="font-size: 150%;">{{$company->name}} offers {{$company->sector->name}} services.</p>
+                <p class="card-text" style="font-size: 150%;">Since {{$company->YOE}}</p>
             </div>
         </div>
 
@@ -153,8 +153,8 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <a class="float-left" href="/review/{{$review->id}}">
-                                        <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid"/>
-                                        <p class="text-secondary text-center">{{$review->created_at}}</p>
+                                        <img src="../storage/{{$review->image}}" class="img img-rounded img-fluid" style="width:100%; height:85%"/>
+                                        <p class="text-secondary text-center">{{$review->created_at->diffForHumans()}}</p>
                                     </a>
                                 </div>
                                 <div class="col-md-10">

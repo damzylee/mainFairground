@@ -59,7 +59,7 @@ class SectorsController extends Controller
      */
     public function show($sectors)
     {
-        $sector = Sectors::where('id', '=', $sectors)->get();
+        $sector = Sectors::where('id', '=', $sectors)->orderBy('id', 'desc')->get();
         $sector = $sector[0];
         $companies = Company::where('sector_id', '=', $sector->id)->paginate(8);
         // dd($companies);
